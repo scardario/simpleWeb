@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple login</title>
+        <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> -->
+    </head>
+    <body>
+		{% if session['usuarioActivo'] %}
+			<p>Usuario activo: {{ session['usuarioActivo'] }}</p>
+		{% endif %}
+        <h1>{% block heading %}{% endblock %}</h1>
+
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

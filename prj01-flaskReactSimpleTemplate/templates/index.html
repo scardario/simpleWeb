@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    Bienvenido
+{% endblock %}
+
+{% block body %}
+	<p>
+		seleccione la acción que quiere realizar
+	</p>
+
+	<a href="{{ url_for('login') }}">Login</a>
+	<a href="{{ url_for('registro') }}">Registrar usuario</a>
+
+	<ul>
+		{% for usuario in usuarios %}
+			<li>{{ usuario.nombre }}</li>
+		{% endfor %}
+	</ul>
+	
+{% endblock %}

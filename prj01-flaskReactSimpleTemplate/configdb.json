@@ -1,0 +1,7 @@
+{
+	"DEBUG": true,
+	"TESTING": false,
+	"CSRF_ENABLED": true,
+	"SECRET_KEY": "Secreto",
+	"SQLALCHEMY_DATABASE_URI": "postgresql://localhost/usuariosLogin"
+}

@@ -1,0 +1,41 @@
+{% extends "manager/layout.html" %}
+	{% block titulo %}
+		login manager 2
+	{% endblock %}
+{% block cuerpo %}
+	<div id="app" >acá va el app</div>
+	<script type="text/babel">
+		class App extends React.Component {
+			constructor(props){
+				super(props)
+				this.state={
+					texto: 'algo pasó por aquí',
+					usuarios: {}
+				}
+			}
+
+			// cargar(){
+			// }
+
+			render(){
+				fetch('usuarios')
+				.then(response => response.json())
+				.then(data => {
+					// console.log('datos:', data)
+					for(var llave in data){
+						// console.log(`ingresando al diccionario: ${llave}:${typeof(llave)}, ${data[llave]}`)
+						this.state.usuarios[llave]=data[llave]
+						// console.log(`ingresado: ${this.state.usuarios[llave]} con llave ${llave}`)
+					}
+				})
+				// const {usuarios} = this.state
+				this.state.usuarios['dario'] = 'Dario Galeano'
+				console.log(`diccionario de usuarios: ${this.state.usuarios['oscar']}`)
+				return <div>texto de prueba: {this.state.usuarios['oscar']}</div>
+			}
+		}
+
+		ReactDOM.render(<App />, document.querySelector("#app"))
+	</script>
+
+{% endblock %}

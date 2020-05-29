@@ -12,25 +12,30 @@
 					texto: 'algo pasó por aquí',
 					usuarios: {}
 				}
+				this.obtenerDatos()
 			}
 
-			// cargar(){
-			// }
+			datosObtenidos(datos){
+				console.log('datos obtenidos:',datos)
+			}
 
-			render(){
+			obtenerDatos(){
+				let datos = {}
 				fetch('usuarios')
 				.then(response => response.json())
 				.then(data => {
-					// console.log('datos:', data)
-					for(var llave in data){
-						// console.log(`ingresando al diccionario: ${llave}:${typeof(llave)}, ${data[llave]}`)
-						this.state.usuarios[llave]=data[llave]
-						// console.log(`ingresado: ${this.state.usuarios[llave]} con llave ${llave}`)
-					}
+					console.log('obteniendo datos:', data)
+					datos = data
+					this.datosObtenidos(datos)
 				})
-				// const {usuarios} = this.state
-				this.state.usuarios['dario'] = 'Dario Galeano'
-				console.log(`diccionario de usuarios: ${this.state.usuarios['oscar']}`)
+			}
+
+			render(){
+				console.log('renderizando...')
+				// this.setState({
+				// 	usuarios: data.usuarios
+				// })
+				// console.log(this.state.usuarios)
 				return <div>texto de prueba: {this.state.usuarios['oscar']}</div>
 			}
 		}

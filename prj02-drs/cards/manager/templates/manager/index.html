@@ -1,46 +1,44 @@
 {% extends "manager/layout.html" %}
-	{% block titulo %}
-		login manager 2
-	{% endblock %}
-{% block cuerpo %}
-	<div id="app" >acá va el app</div>
-	<script type="text/babel">
-		class App extends React.Component {
-			constructor(props){
-				super(props)
-				this.state={
-					texto: 'algo pasó por aquí',
-					usuarios: {}
-				}
-				this.obtenerDatos()
-			}
+{% block script %}
+<script type="text/babel">
 
-			datosObtenidos(datos){
-				console.log('datos obtenidos:',datos)
-			}
+	const TituloUsuario = props => <div><h2>{props.nombre}</h2></div>
 
-			obtenerDatos(){
-				let datos = {}
-				fetch('usuarios')
-				.then(response => response.json())
-				.then(data => {
-					console.log('obteniendo datos:', data)
-					datos = data
-					this.datosObtenidos(datos)
-				})
+	class App extends React.Component {
+		constructor(props){
+			super(props)
+			this.state={
+				texto: 'algo pasó por aquí',
+				usuarios: []
 			}
-
-			render(){
-				console.log('renderizando...')
-				// this.setState({
-				// 	usuarios: data.usuarios
-				// })
-				// console.log(this.state.usuarios)
-				return <div>texto de prueba: {this.state.usuarios['oscar']}</div>
-			}
+			this.obtenerDatos()
 		}
 
-		ReactDOM.render(<App />, document.querySelector("#app"))
-	</script>
+		obtenerDatos(){
+			let datos = {}
+			fetch('usuarios')
+			.then(response => response.json())
+			.then(data => {
+				for(var llave in data){
+					this.setState({
+						usuarios: [...this.state.usuarios, {username: llave, nombre: data[llave]}]
+					})
+				}
+				console.log('datos cargados')
+			})
+		}
+
+		render(){
+			console.log('renderizando...', typeof this.state.usuarios)
+			return <div>Usuarios: 
+			{this.state.usuarios.map(usuario => (
+				<TituloUsuario nombre={usuario.nombre} />
+			))}
+			</div>
+		}
+	}
+
+	ReactDOM.render(<App />, document.querySelector("#app"))
+</script>
 
 {% endblock %}

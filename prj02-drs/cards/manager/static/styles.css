@@ -1,0 +1,27 @@
+/* body {
+	align-items: center;
+} */
+
+/* input, .formulario {
+	border: solid .5mm black;
+} */
+
+#titulo h1{
+	text-align: center;
+}
+
+form {
+	border: dotted 1px greenyellow;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.elemForm {
+	border: dotted 1px red;
+	/* margin-left: auto;
+	margin-right: auto; */
+	margin-top: 1%;
+}

@@ -1,0 +1,69 @@
+{% extends "manager/layout.html" %}
+{% block script %}
+<script type="text/babel">
+
+	const VerifInput = props => (
+		<img src={props.rutaImg} alt="icono" width="20" />
+	)
+
+	class LoginApp extends React.Component {
+		constructor(props){
+			super(props)
+			this.state = {
+				iconoUsuario: "/static/imgs/vacia.svg"
+			}
+		}
+
+		verificarUsuario = event => {
+			if(event.target.value.length>0){
+				let valorEnCampoUsuario = event.target.value
+				let urlConsulta = 'usuarios/' + valorEnCampoUsuario
+				fetch(urlConsulta)
+				.then(response => response.json())
+				.then(data => {
+					if(data[valorEnCampoUsuario]===false){
+						this.setState({
+							iconoUsuario: "/static/imgs/equis.svg"
+						})
+					}
+					else {
+						this.setState({
+							iconoUsuario: "/static/imgs/chulo.svg"
+						})
+					}
+				})
+			}
+			else {
+				this.setState({
+					iconoUsuario: "/static/imgs/vacia.svg"
+				})
+			}
+		}
+
+		ingresandoUsuario = event => {
+			this.setState({
+				iconoUsuario: "/static/imgs/esperando.svg"
+			})
+		}
+
+		render(){
+			return (
+				<div >
+					<form>
+						<div className="elemForm">
+							<input id="nombreUsuario" placeholder="username" onBlur={this.verificarUsuario} onChange={this.ingresandoUsuario} />
+							<VerifInput rutaImg={this.state.iconoUsuario} />
+						</div>
+						<input className="elemForm" type="password" id="contrasena" placeholder="password"/>
+						<button className="elemForm" type="submit">Enter</button>
+					</form>
+					<form>
+						<input id="prueba"/>
+					</form>
+				</div>
+			)
+		}
+	}
+	ReactDOM.render(<LoginApp />, document.querySelector("#app"))
+</script>
+{% endblock %}

@@ -10,7 +10,13 @@ logger = logging.getLogger(__name__)
 def indiceManager(request):
 	usuarios = User.objects.all()
 	return render(request, 'manager/index.html', {
-			"usuarios": usuarios
+			"usuarios": usuarios,
+			"titulo": 'User list'
+	})
+
+def login(request):
+	return render(request, 'manager/login.html', {
+		"titulo": 'Login'
 	})
 
 def listaUsuarios(request):
@@ -19,3 +25,17 @@ def listaUsuarios(request):
 	for usuario in usuarios:
 		datosUsuario[usuario.username] = usuario.get_full_name()
 	return JsonResponse(datosUsuario)
+
+def estaUsuario(request, usuario):
+	dicc = {
+		usuario: True
+	}
+
+	try:
+		busqueda = User.objects.get(username=usuario)
+	except:
+		dicc = {
+			usuario: False
+		}
+
+	return JsonResponse(dicc)

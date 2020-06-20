@@ -1,18 +1,26 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
     <head>
+		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
         <title>
-            {% block titulo %}
-            {% endblock %}
+				{{ titulo }} 
 		</title>
 			<!-- <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
 			<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script> -->
 			<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 			<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 			<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+			<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}?{% now "U" %}">
     </head>
     <body>
-        {% block cuerpo %}
+		<div id="titulo">
+			<h1>{{ titulo }}</h1>
+		</div>
+		<div id="app" ></div>
+
+        {% block script %}
         {% endblock %}
     </body>
 </html>
